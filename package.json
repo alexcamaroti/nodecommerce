@@ -1,0 +1,19 @@
+{
+  "name": "br.com.camaroti.alex.nodecommerce",
+  "version": "1.0.0",
+  "description": "An ecommerce app using node functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index"
+  },
+  "keywords": [
+    "node",
+    "ecommerce"
+  ],
+  "author": "Alex Sandro Camaroti",
+  "license": "ISC",
+  "dependencies": {
+    "express": "4.16.4",
+    "nodemon": "1.18.9"
+  }
+}
