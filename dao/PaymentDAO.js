@@ -1,15 +1,17 @@
 var esservice = require('./../persistence/ESService');
+var database = "test1";
+var table_type = "payments";
 
 class PaymentDAO {
 
     constructor(){
         this._db = esservice;
-    }
-    
+    } 
 
-    list() {
+    listAll() {
+        var BODY_REQUEST = "{'query' : {'match_all': { }}}";
         return new Promise((resolve, reject) => {
-            this._db.all('SELECT * FROM recipes', 
+            this._db.search(req, res, database, table_type, BODY_REQUEST, 
             function(err, result) {
                 if(err) return reject("It was not possible to show the recipes.")
     
@@ -18,27 +20,16 @@ class PaymentDAO {
         })
     }
  
-    add(recipe) {
+    add(req, res, recipe) {
         return new Promise((resolve, reject) => {
-            this._db.run(
-                `
-                INSERT INTO recipes (
-                    name,
-                    price,
-                    description
-                ) VALUES (?,?,?)
-                `,
-                [
-                    recipe.name,
-                    recipe.price,
-                    recipe.description
-                ],
+            console.log("Accessing PaymentDAO:add");
+            this._db.addDocument(recipe, res, database, null, table_type, recipe,
                 function(err) {
                     if(err) {
                         console.log(err);
                         return reject("It was not possible to insert a new recipe.");                        
                     }
-                    resolve();
+                    resolve(res);
                 });
         })
     }

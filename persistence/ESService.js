@@ -68,19 +68,19 @@ module.exports = {
 
 	// 4. Add/Update a document
 	addDocument: function(req, res, indexName, _id, docType, payload){
+		console.log("Accessing ESService:addDocument");
 	    elasticClient.index({
 	        index: indexName,
 	        type: docType,
 	        id: _id,
 	        body: payload
 	    }).then(function (resp) {
-	        // console.log(resp);
 	        res.status(200);
-	        return res.json(resp)
+	        return res.json(resp);
 	    }, function (err) {
-	        // console.log(err.message);
+	        console.log(err.message);
 	        res.status(500)
-	        return res.json(err)
+	        return res.json(err);
 	    });
 	},
 
