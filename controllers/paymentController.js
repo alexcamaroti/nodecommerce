@@ -18,4 +18,9 @@ module.exports = function(app) {
         console.log("Payment + conteudo" + JSON.stringify(payment));
         var payment = paymentDAO.add(null, res, payment);
     });
+
+    app.get("/payments/all", function(req, res) {
+        let paymentDAO = new PaymentDAO(); 
+        console.log("paymentController:all: " + paymentDAO.listAll(null, res));
+    });
 }

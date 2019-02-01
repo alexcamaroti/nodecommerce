@@ -106,8 +106,8 @@ module.exports = {
 	        type: docType,
 	        body: payload
 	    }).then(function (resp) {
-	        console.log(resp);
-	        return res.json(resp)
+	        console.log("Recebendo response ESService:search:" + JSON.stringify(resp));
+	        return res.json(resp.hits)
 	    }, function (err) {
 	        console.log(err.message);
 	        return res.json(err.message)

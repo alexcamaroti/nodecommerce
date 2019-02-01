@@ -8,14 +8,15 @@ class PaymentDAO {
         this._db = esservice;
     } 
 
-    listAll() {
-        var BODY_REQUEST = "{'query' : {'match_all': { }}}";
-        return new Promise((resolve, reject) => {
-            this._db.search(req, res, database, table_type, BODY_REQUEST, 
-            function(err, result) {
+    listAll(req, res) {
+        var BODY_REQUEST = JSON.parse("{\"query\" : {\"match_all\": { }}}");
+        return new Promise((resolve, reject) => {           
+            this._db.search(null, res, database, table_type, BODY_REQUEST, 
+            function(err) {
                 if(err) return reject("It was not possible to show the recipes.")
     
-                resolve(result)
+                console.log("PaymentDAO:listAll" + res);
+                resolve(res);
             });
         })
     }
@@ -23,7 +24,7 @@ class PaymentDAO {
     add(req, res, recipe) {
         return new Promise((resolve, reject) => {
             console.log("Accessing PaymentDAO:add");
-            this._db.addDocument(recipe, res, database, null, table_type, recipe,
+            this._db.addDocument(null, res, database, null, table_type, recipe,
                 function(err) {
                     if(err) {
                         console.log(err);
